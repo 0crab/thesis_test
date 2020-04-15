@@ -13,7 +13,7 @@ Binary Protocol Reference:
 #include <netinet/in.h>
 #include "tracer.h"
 #define UNIX_DOMAIN "/home/czl/memcached.sock"
-#define TEST_NUM 10000
+#define TEST_NUM 10000000
 #define PACKAGE_NUM 1
 #define MEMCACHED_MAX_BUF 8192
 #define ST_LEN 100
