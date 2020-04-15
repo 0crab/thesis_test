@@ -76,8 +76,8 @@ void con_database(){
 }
 
 int con_send_package(int num,char * st_buf){
-#define GETQ_OFFSET(i) ((num*PACKAGE_NUM+i)*32)
-#define GET_OFFSET   ((num*PACKAGE_NUM+PACKAGE_NUM-1)*32)
+#define GETQ_OFFSET(i) (i*32)
+#define GET_OFFSET   ((PACKAGE_NUM-1)*32)
 
     for(int i=0 ;i<PACKAGE_NUM-1;i++){
         st_buf[GETQ_OFFSET(i)+0]=0x80;
