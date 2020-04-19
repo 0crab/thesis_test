@@ -7,14 +7,14 @@
 
 #include "tracer1.h"
 
-#define THREAD_NUM 4
+
 
 #define BATCH_SIZE 4096
 #define SET_HEAD_SIZE 32
 #define GET_HEAD_SIZE 24
 
 
-unsigned long runtimelist[THREAD_NUM];
+
 
 
 using namespace ycsb;
@@ -24,6 +24,9 @@ typedef struct SendBatch{
     std::size_t size;//real data size
 }sendbatch;
 
+int THREAD_NUM=4;
+
+unsigned long  *runtimelist;
 
 std::vector<YCSB_request *> loads;
 
@@ -40,8 +43,10 @@ void send_thread(int tid);
 
 int main(int argc, char **argv){
     char * path;
-    if(argc == 2){
-        path=argv[1];
+    if(argc == 3){
+        THREAD_NUM=std::atol(argv[1]);
+        runtimelist=(unsigned long *)malloc(THREAD_NUM* sizeof(unsigned long));
+        path=argv[2];
     }else{
         printf("please input filename\n");
         return 0;
