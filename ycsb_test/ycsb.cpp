@@ -75,7 +75,7 @@ int main(int argc, char **argv){
     for(int i = 0;i < THREAD_NUM; i++){
         runtime += runtimelist[i];
     }
-    runtime /= (THREAD_NUM*THREAD_NUM);
+    runtime /= (THREAD_NUM);
     printf("\n____\nruntime:%lu\n",runtime);
 
     return 0;
