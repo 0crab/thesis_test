@@ -3,8 +3,7 @@ project(thesis_test)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_subdirectory(get_test)
 
-add_subdirectory(set_test)
+add_executable(ycsb ycsb.cpp )
 
-add_subdirectory(ycsb_test)
+target_link_libraries(ycsb pthread)

@@ -5,3 +5,5 @@ set(CMAKE_CXX_STANDARD 11)
 add_executable(get_binary get_binary.cc)
 
 add_executable(get_binary_batch get_binary_batch.cc)
+
+add_executable(get_binary_batch_getq get_binary_batch_getq.cc)

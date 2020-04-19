@@ -12,6 +12,7 @@ Binary Protocol Reference:
 #include <netinet/in.h>
 #include <cstring>
 #include "tracer.h"
+//#include "../ycsb_test/tracer1.h"
 
 
 #define UNIX_DOMAIN "/home/czl/memcached.sock"

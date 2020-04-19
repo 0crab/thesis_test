@@ -1,3 +1,7 @@
+//
+// Created by czl on 4/18/20.
+//
+
 /*
 Binary Protocol Reference:
  https://github.com/memcached/memcached/wiki/BinaryProtocolRevamped
@@ -55,12 +59,12 @@ int main(void)
     tracer.startTime();
     for(int i=0;i<TEST_NUM/PACKAGE_NUM;i++){
         write(connect_fd,database[i],32*PACKAGE_NUM);
-        if((i+1)%PACKAGE_NUM==0){
-            readnum=read(connect_fd,read_buf,100*PACKAGE_NUM);
-            while(readnum>=100*PACKAGE_NUM){
-                readnum=read(connect_fd,read_buf,100*PACKAGE_NUM);
-            }
-        }
+//        if((i+1)%PACKAGE_NUM==0){
+//            readnum=read(connect_fd,read_buf,100*PACKAGE_NUM);
+//            while(readnum>=100*PACKAGE_NUM){
+//                readnum=read(connect_fd,read_buf,100*PACKAGE_NUM);
+//            }
+//        }
     }
     runtime+=tracer.getRunTime();
     printf("%ld\n",runtime);
@@ -82,7 +86,7 @@ int con_send_package(int num,char * st_buf){
 #define GETQ_OFFSET(i) (i*32)
 #define GET_OFFSET   ((PACKAGE_NUM-1)*32)
     //OP:GETQ
-    for(int i=0 ;i<PACKAGE_NUM-1;i++){
+    for(int i=0 ;i<PACKAGE_NUM;i++){
         st_buf[GETQ_OFFSET(i)+0]=0x80;
         st_buf[GETQ_OFFSET(i)+1]=0x09;
 
@@ -93,12 +97,12 @@ int con_send_package(int num,char * st_buf){
     }
     //OP:GET
     //Magic: Request
-    st_buf[GET_OFFSET+0]=0x80;
-    //keylength
-    st_buf[GET_OFFSET+3]=0x08;
-    st_buf[GET_OFFSET+11]=0x08;
-    unsigned long *keyptr=(unsigned long *)(st_buf+GET_OFFSET+24);
-    *keyptr=(unsigned long )(num*PACKAGE_NUM+PACKAGE_NUM-1);
+//    st_buf[GET_OFFSET+0]=0x80;
+//    //keylength
+//    st_buf[GET_OFFSET+3]=0x08;
+//    st_buf[GET_OFFSET+11]=0x08;
+//    unsigned long *keyptr=(unsigned long *)(st_buf+GET_OFFSET+24);
+//    *keyptr=(unsigned long )(num*PACKAGE_NUM+PACKAGE_NUM-1);
 
 
     return 0;

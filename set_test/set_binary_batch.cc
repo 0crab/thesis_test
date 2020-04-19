@@ -11,6 +11,7 @@ Binary Protocol Reference:
 #include <sys/unistd.h>
 #include <cstring>
 #include <netinet/in.h>
+#include <sys/ioctl.h>
 #include "tracer.h"
 
 
@@ -57,6 +58,8 @@ int main(void)
     long runtime=0;
     tracer.startTime();
     for(int i=0;i<TEST_NUM/BATCH_NUM;i++){
+//        int iMode = 1;
+//        ioctl(connect_fd,FIONBIO, &iMode);
         write(connect_fd,database[i],PACKAGE_LEN*BATCH_NUM);
     }
     runtime+=tracer.getRunTime();
@@ -69,7 +72,7 @@ void con_database(){
     char * package_buf;
     char * st_buf;
     for(int i=0;i<TEST_NUM/BATCH_NUM;i++){
-        st_buf=static_cast<char *>(malloc(4096));
+        st_buf=static_cast<char *>(malloc(50*BATCH_NUM));
         for(int j=0;j<BATCH_NUM;j++){
             package_buf= static_cast<char *>(malloc(50));
             con_send_package(i*BATCH_NUM+j,package_buf);

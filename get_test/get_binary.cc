@@ -56,6 +56,7 @@ int main(void)
         tracer.startTime();
         write(connect_fd,database[i],32);
         readnum=read(connect_fd,read_buf,100);
+	if(readnum>0) printf("rec:%d\n",readnum);
         while(readnum>=100){
             readnum=read(connect_fd,read_buf,100);
         }
